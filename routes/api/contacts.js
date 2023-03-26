@@ -37,8 +37,6 @@ router.get("/", async (req, res, next) => {
 router.get("/:contactId", async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    // console.log(contactId);
-
     const result = await contacts.getContactById(contactId);
     if (!result) {
       /**
@@ -101,7 +99,23 @@ router.post("/", async (req, res, next) => {
 });
 
 router.delete("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
+  try {
+    const { contactId } = req.params;
+    const result = await contacts.removeContact(contactId);
+    if (!result) {
+      throw new NotFound("Not found");
+    }
+    res.json({
+      status: "success",
+      code: 200,
+      message: "contact deleted",
+      // data: {
+      //   result,
+      // },
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.put("/:contactId", async (req, res, next) => {
