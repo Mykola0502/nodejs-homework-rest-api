@@ -1,29 +1,28 @@
 const express = require("express");
-// const createError = require("http-errors");
-// const { NotFound } = require("http-errors");
-// const Joi = require("joi");
 
 const { contacts: ctrlsContacts } = require("../../controllers");
-
-// const contactSchema = Joi.object({
-//   name: Joi.string().required(),
-//   email: Joi.string().email().required(),
-//   phone: Joi.string().required(),
-// });
-
-// const contacts = require("../../models/contacts");
+const { validation, ctrlWrapper } = require("../../middlewares");
+const { contactSchema } = require("../../schemas");
 
 const router = express.Router();
 
-router.get("/", ctrlsContacts.getContacts);
+router.get("/", ctrlWrapper(ctrlsContacts.getContacts));
 
-router.get("/:contactId", ctrlsContacts.getContactById);
+router.get("/:contactId", ctrlWrapper(ctrlsContacts.getContactById));
 
-router.post("/", ctrlsContacts.addContact);
+router.post(
+  "/",
+  validation(contactSchema),
+  ctrlWrapper(ctrlsContacts.addContact)
+);
 
-router.delete("/:contactId", ctrlsContacts.removeContactById);
+router.delete("/:contactId", ctrlWrapper(ctrlsContacts.removeContactById));
 
-router.put("/:contactId", ctrlsContacts.updateContactById);
+router.put(
+  "/:contactId",
+  validation(contactSchema),
+  ctrlWrapper(ctrlsContacts.updateContactById)
+);
 
 module.exports = router;
 
