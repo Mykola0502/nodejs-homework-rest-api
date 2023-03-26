@@ -12,9 +12,6 @@ const removeContactById = async (req, res) => {
     status: "success",
     code: 200,
     message: "contact deleted",
-    // data: {
-    //   result,
-    // },
   });
 };
 

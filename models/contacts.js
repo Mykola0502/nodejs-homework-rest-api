@@ -4,8 +4,6 @@ const { v4 } = require("uuid");
 
 const contactsPath = path.join(__dirname, "contacts.json");
 
-// console.log(contactsPath);
-
 const updateContacts = async (contacts) => {
   await fs.writeFile(contactsPath, JSON.stringify(contacts));
 };
@@ -18,9 +16,7 @@ const listContacts = async () => {
 
 const getContactById = async (contactId) => {
   const contacts = await listContacts();
-  // console.log(contacts);
   const result = contacts.find((item) => item.id === contactId);
-  // console.log(result);
   if (!result) {
     return null;
   }
