@@ -1,6 +1,13 @@
 const express = require("express");
 // const createError = require("http-errors");
 const { NotFound } = require("http-errors");
+const Joi = require("joi");
+
+const contactSchema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string().email().required(),
+  phone: Joi.string().required(),
+});
 
 const contacts = require("../../models/contacts");
 
@@ -73,7 +80,25 @@ router.get("/:contactId", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  res.json({ message: "template message" });
+  try {
+    const { error } = contactSchema.validate(req.body);
+    if (error) {
+      console.log(error);
+      error.status = 400;
+      error.message += ". Missing required field";
+      throw error;
+    }
+    const result = await contacts.addContact(req.body);
+    res.status(201).json({
+      status: "success",
+      code: 201,
+      data: {
+        result,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.delete("/:contactId", async (req, res, next) => {
