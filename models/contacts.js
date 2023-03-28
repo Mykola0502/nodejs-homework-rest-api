@@ -29,9 +29,6 @@ const removeContact = async (contactId) => {
   if (idx === -1) {
     return null;
   }
-  // const newContacts = contacts.filter((_, index) => index !== idx);
-  // await updateContacts(newContacts);
-
   const [deletedContact] = contacts.splice(idx, 1);
   await updateContacts(contacts);
   return deletedContact;
@@ -51,7 +48,7 @@ const updateContact = async (contactId, body) => {
   if (idx === -1) {
     return null;
   }
-  contacts[idx] = { id: contactId, ...body };
+  contacts[idx] = { ...contacts[idx], ...body };
   await updateContacts(contacts);
   return contacts[idx];
 };
