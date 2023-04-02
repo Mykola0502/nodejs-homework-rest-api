@@ -15,20 +15,20 @@ const router = express.Router();
 
 router.get("/", ctrlWrapper(ctrlsContacts.getContacts));
 
-router.get("/:contactId", ctrlWrapper(ctrlsContacts.getContactById));
+// router.get("/:contactId", ctrlWrapper(ctrlsContacts.getContactById));
 
-router.post(
-  "/",
-  addvalidation(JoiAddContactSchema),
-  ctrlWrapper(ctrlsContacts.addContact)
-);
+// router.post(
+//   "/",
+//   addvalidation(JoiAddContactSchema),
+//   ctrlWrapper(ctrlsContacts.addContact)
+// );
 
-router.delete("/:contactId", ctrlWrapper(ctrlsContacts.removeContactById));
+// router.delete("/:contactId", ctrlWrapper(ctrlsContacts.removeContactById));
 
-router.put(
-  "/:contactId",
-  updatevalidation(JoiUpdateContactSchema),
-  ctrlWrapper(ctrlsContacts.updateContactById)
-);
+// router.put(
+//   "/:contactId",
+//   updatevalidation(JoiUpdateContactSchema),
+//   ctrlWrapper(ctrlsContacts.updateContactById)
+// );
 
 module.exports = router;
