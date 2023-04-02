@@ -1,11 +1,7 @@
-// Rm8gvjlsC7fqwj9z
-// mongodb+srv://Mykola:Rm8gvjlsC7fqwj9z@goit.prffiwt.mongodb.net/test
-// mongodb+srv://Mykola:Rm8gvjlsC7fqwj9z@goit.prffiwt.mongodb.net/db-contacts?retryWrites=true&w=majority
-
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
-require("dotenv").config()
+require("dotenv").config();
 
 const contactsRouter = require("./routes/api/contacts");
 

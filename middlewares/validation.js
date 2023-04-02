@@ -1,4 +1,4 @@
-const addvalidation = (schema) => {
+const addValidation = (schema) => {
   return (req, res, next) => {
     const { name, phone, email } = req.body;
     const { error } = schema.validate(req.body);
@@ -17,11 +17,10 @@ const addvalidation = (schema) => {
   };
 };
 
-const updatevalidation = (schema) => {
+const updateValidation = (schema) => {
   return (req, res, next) => {
     const { name, phone, email } = req.body;
     const { error } = schema.validate(req.body);
-    console.log(name, phone, email);
     if (error) {
       error.status = 400;
       next(error);
@@ -37,7 +36,27 @@ const updatevalidation = (schema) => {
   };
 };
 
+const favoriteValidation = (schema) => {
+  return (req, res, next) => {
+    const { favorite } = req.body;
+    const { error } = schema.validate(req.body);
+    if (error) {
+      error.status = 400;
+      next(error);
+      return;
+    } else if (!favorite) {
+      const error = new Error("Missing field favorite");
+      error.status = 400;
+      next(error);
+      return;
+    }
+
+    next();
+  };
+};
+
 module.exports = {
-  addvalidation,
-  updatevalidation,
+  addValidation,
+  updateValidation,
+  favoriteValidation,
 };
