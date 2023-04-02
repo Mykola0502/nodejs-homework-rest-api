@@ -6,7 +6,10 @@ const {
   updatevalidation,
   ctrlWrapper,
 } = require("../../middlewares");
-const schema = require("../../schemas");
+const {
+  JoiAddContactSchema,
+  JoiUpdateContactSchema,
+} = require("../../models/contact");
 
 const router = express.Router();
 
@@ -16,7 +19,7 @@ router.get("/:contactId", ctrlWrapper(ctrlsContacts.getContactById));
 
 router.post(
   "/",
-  addvalidation(schema.addContactSchema),
+  addvalidation(JoiAddContactSchema),
   ctrlWrapper(ctrlsContacts.addContact)
 );
 
@@ -24,7 +27,7 @@ router.delete("/:contactId", ctrlWrapper(ctrlsContacts.removeContactById));
 
 router.put(
   "/:contactId",
-  updatevalidation(schema.updateContactSchema),
+  updatevalidation(JoiUpdateContactSchema),
   ctrlWrapper(ctrlsContacts.updateContactById)
 );
 
