@@ -23,7 +23,7 @@ router.post(
   ctrlWrapper(ctrlsContacts.addContact)
 );
 
-// router.delete("/:contactId", ctrlWrapper(ctrlsContacts.removeContactById));
+router.delete("/:contactId", ctrlWrapper(ctrlsContacts.removeContactById));
 
 router.put(
   "/:contactId",
