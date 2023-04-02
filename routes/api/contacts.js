@@ -2,20 +2,20 @@ const express = require("express");
 
 const { contacts: ctrlsContacts } = require("../../controllers");
 const {
-  addvalidation,
-  updatevalidation,
+  // addvalidation,
+  // updatevalidation,
   ctrlWrapper,
 } = require("../../middlewares");
-const {
-  JoiAddContactSchema,
-  JoiUpdateContactSchema,
-} = require("../../models/contact");
+// const {
+//   JoiAddContactSchema,
+//   JoiUpdateContactSchema,
+// } = require("../../models/contact");
 
 const router = express.Router();
 
 router.get("/", ctrlWrapper(ctrlsContacts.getContacts));
 
-// router.get("/:contactId", ctrlWrapper(ctrlsContacts.getContactById));
+router.get("/:contactId", ctrlWrapper(ctrlsContacts.getContactById));
 
 // router.post(
 //   "/",
