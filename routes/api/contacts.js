@@ -25,10 +25,10 @@ router.post(
 
 // router.delete("/:contactId", ctrlWrapper(ctrlsContacts.removeContactById));
 
-// router.put(
-//   "/:contactId",
-//   updatevalidation(JoiUpdateContactSchema),
-//   ctrlWrapper(ctrlsContacts.updateContactById)
-// );
+router.put(
+  "/:contactId",
+  updatevalidation(JoiUpdateContactSchema),
+  ctrlWrapper(ctrlsContacts.updateContactById)
+);
 
 module.exports = router;
