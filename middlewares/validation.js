@@ -1,3 +1,5 @@
+const { RequestError } = require("../helpers");
+
 const addValidation = (schema) => {
   return (req, res, next) => {
     const { name, phone, email } = req.body;
@@ -7,6 +9,7 @@ const addValidation = (schema) => {
       next(error);
       return;
     } else if (!name || !phone || !email) {
+      // const error = RequestError(400, ". Missing required field");
       const error = new Error(". Missing required field");
       error.status = 400;
       next(error);
@@ -26,8 +29,9 @@ const updateValidation = (schema) => {
       next(error);
       return;
     } else if (!name && !phone && !email) {
-      const error = new Error("Missing fields");
-      error.status = 400;
+      const error = RequestError(400, "Missing fields");
+      // const error = new Error("Missing fields");
+      // error.status = 400;
       next(error);
       return;
     }
@@ -45,8 +49,9 @@ const favoriteValidation = (schema) => {
       next(error);
       return;
     } else if (!favorite) {
-      const error = new Error("Missing field favorite");
-      error.status = 400;
+      const error = RequestError(400, "Missing field favorite");
+      // const error = new Error("Missing field favorite");
+      // error.status = 400;
       next(error);
       return;
     }

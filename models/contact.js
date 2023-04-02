@@ -36,10 +36,8 @@ const JoiUpdateContactSchema = Joi.object({
 });
 
 const JoiFavoriteContactSchema = Joi.object({
-  name: Joi.string(),
-  email: Joi.string().email(),
-  phone: Joi.string(),
-  favorite: Joi.boolean().required(),
+  favorite: Joi.number().required(),
+  // favorite: Joi.boolean().required(),
 });
 
 const Contact = model("contact", contactSchema);
