@@ -1,8 +1,15 @@
-const { addvalidation, updatevalidation } = require("./validation");
+const {
+  addValidation,
+  updateValidation,
+  favoriteValidation,
+} = require("./validation");
 const ctrlWrapper = require("./ctrlWrapper");
+const isValidId = require("./isValidId");
 
 module.exports = {
-  addvalidation,
-  updatevalidation,
+  addValidation,
+  updateValidation,
+  favoriteValidation,
   ctrlWrapper,
+  isValidId,
 };
