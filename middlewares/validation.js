@@ -18,36 +18,10 @@ const addValidation = (schema) => {
       next(error);
       return;
     }
-    // else if (!name || !phone || !email) {
-    //   const error = new Error(". Missing required field");
-    //   error.status = 400;
-    //   next(error);
-    //   return;
-    // }
 
     next();
   };
 };
-
-// const updateValidation = (schema) => {
-//   return (req, res, next) => {
-//     const { name, phone, email } = req.body;
-//     const { error } = schema.validate(req.body);
-//     if (error) {
-//       error.status = 400;
-//       next(error);
-//       return;
-//     } else if (!name && !phone && !email) {
-//       const error = RequestError(400, "Missing fields");
-//       // const error = new Error("Missing fields");
-//       // error.status = 400;
-//       next(error);
-//       return;
-//     }
-
-//     next();
-//   };
-// };
 
 const updateValidation = (schema) => {
   return (req, res, next) => {
@@ -64,13 +38,6 @@ const updateValidation = (schema) => {
       next(error);
       return;
     }
-    // else if (!name && !phone && !email) {
-    //   const error = RequestError(400, "Missing fields");
-    //   // const error = new Error("Missing fields");
-    //   // error.status = 400;
-    //   next(error);
-    //   return;
-    // }
 
     next();
   };
@@ -85,7 +52,6 @@ const favoriteValidation = (schema) => {
         400,
         `'${favorite}' is not correct favorite format`
       );
-      // const error = RequestError(400, message);
       // const error = new Error("Missing field favorite");
       // error.status = 400;
       next(error);
@@ -95,9 +61,8 @@ const favoriteValidation = (schema) => {
       const errMessage = error.message;
       if (!favorite) {
         const message = `"${errMessage}. Missing field favorite"`;
-        // const error = RequestError(400, "Missing field favorite");
         const error = RequestError(400, message);
-        // const error = new Error("Missing field favorite");
+        // const error = new Error(message);
         // error.status = 400;
         next(error);
         return;
@@ -106,37 +71,10 @@ const favoriteValidation = (schema) => {
       next(error);
       return;
     }
-    // else if (!favorite) {
-    //   const error = RequestError(400, "Missing field favorite");
-    //   // const error = new Error("Missing field favorite");
-    //   // error.status = 400;
-    //   next(error);
-    //   return;
-    // }
 
     next();
   };
 };
-
-// const favoriteValidation = (schema) => {
-//   return (req, res, next) => {
-//     const { favorite } = req.body;
-//     const { error } = schema.validate(req.body);
-//     if (error) {
-//       error.status = 400;
-//       next(error);
-//       return;
-//     } else if (!favorite) {
-//       const error = RequestError(400, "Missing field favorite");
-//       // const error = new Error("Missing field favorite");
-//       // error.status = 400;
-//       next(error);
-//       return;
-//     }
-
-//     next();
-//   };
-// };
 
 module.exports = {
   addValidation,
