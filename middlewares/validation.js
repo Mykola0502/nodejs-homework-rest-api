@@ -3,14 +3,24 @@ const { RequestError } = require("../helpers");
 const addValidation = (schema) => {
   return (req, res, next) => {
     const { name, phone, email } = req.body;
-    const { error } = schema.validate(req.body);
+    const { error, value } = schema.validate(req.body);
+
+    //
+    const keysBody = ["name", "phone", "email"];
+    const values = Object.keys(value);
+    const noKeysBody = [];
+    keysBody.forEach((elem) => {
+      if (!values.includes(elem)) {
+        noKeysBody.push(elem);
+      }
+    });
+    const noKeysBodyToString = noKeysBody.join(", ");
     if (error || !name || !phone || !email) {
-      const errMessage = error.message;
       if (!name || !phone || !email) {
-        const message = `"${errMessage}. Missing required field"`;
-        const error = RequestError(400, message);
-        // error.status = 400;
-        // error.message += ". Missing required field";
+        const error = RequestError(
+          400,
+          `Missing required '${noKeysBodyToString}' field`
+        );
         next(error);
         return;
       }
@@ -18,6 +28,22 @@ const addValidation = (schema) => {
       next(error);
       return;
     }
+    //
+
+    // if (error || !name || !phone || !email) {
+    //   const errMessage = error.message;
+    //   if (!name || !phone || !email) {
+    //     const message = `"${errMessage}. Missing required field"`;
+    //     const error = RequestError(400, message);
+    //     // error.status = 400;
+    //     // error.message += ". Missing required field";
+    //     next(error);
+    //     return;
+    //   }
+    //   error.status = 400;
+    //   next(error);
+    //   return;
+    // }
 
     next();
   };
