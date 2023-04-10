@@ -2,9 +2,10 @@ const express = require("express");
 
 const { contacts: ctrlsContacts } = require("../../controllers");
 const {
-  addValidation,
-  updateValidation,
-  favoriteValidation,
+  // addContactValidation,
+  validationBody,
+  // updateValidation,
+  // favoriteValidation,
   isValidId,
   ctrlWrapper,
 } = require("../../middlewares");
@@ -22,7 +23,8 @@ router.get("/:contactId", isValidId, ctrlWrapper(ctrlsContacts.getContactById));
 
 router.post(
   "/",
-  addValidation(JoiAddContactSchema),
+  // addContactValidation(JoiAddContactSchema),
+  validationBody(JoiAddContactSchema),
   ctrlWrapper(ctrlsContacts.addContact)
 );
 
@@ -35,14 +37,16 @@ router.delete(
 router.put(
   "/:contactId",
   isValidId,
-  updateValidation(JoiUpdateContactSchema),
+  validationBody(JoiUpdateContactSchema),
+  // updateValidation(JoiUpdateContactSchema),
   ctrlWrapper(ctrlsContacts.updateContactById)
 );
 
 router.patch(
   "/:contactId/favorite",
   isValidId,
-  favoriteValidation(JoiFavoriteContactSchema),
+  // favoriteValidation(JoiFavoriteContactSchema),
+  validationBody(JoiFavoriteContactSchema),
   ctrlWrapper(ctrlsContacts.updateFavoriteContact)
 );
 
