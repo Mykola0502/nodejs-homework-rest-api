@@ -19,8 +19,8 @@ const {
 
 const validationBody = (schema) => {
   return (req, res, next) => {
-    console.log(req.method, req.baseUrl);
-    console.log(req.body);
+    // console.log(req.method, req.baseUrl);
+    // console.log(req.body);
 
     const { error } = schema.validate(req.body);
     if (error) {
