@@ -22,7 +22,6 @@ const addContact = async (req, res, next) => {
       result,
     },
   });
-  next();
 };
 
 // const addContact = async (req, res) => {
