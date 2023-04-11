@@ -10,10 +10,11 @@ const {
   ctrlWrapper,
 } = require("../../middlewares");
 const {
-  JoiAddContactSchema,
-  JoiUpdateContactSchema,
-  JoiFavoriteContactSchema,
-} = require("../../models/contact");
+  conactJoiSchemas,
+  // JoiAddContactSchema,
+  // JoiUpdateContactSchema,
+  // JoiFavoriteContactSchema,
+} = require("../../models");
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.get("/:contactId", isValidId, ctrlWrapper(ctrlsContacts.getContactById));
 router.post(
   "/",
   // addContactValidation(JoiAddContactSchema),
-  validationBody(JoiAddContactSchema),
+  validationBody(conactJoiSchemas.JoiAddContactSchema),
   ctrlWrapper(ctrlsContacts.addContact)
 );
 
@@ -37,7 +38,7 @@ router.delete(
 router.put(
   "/:contactId",
   isValidId,
-  validationBody(JoiUpdateContactSchema),
+  validationBody(conactJoiSchemas.JoiUpdateContactSchema),
   // updateValidation(JoiUpdateContactSchema),
   ctrlWrapper(ctrlsContacts.updateContactById)
 );
@@ -46,7 +47,7 @@ router.patch(
   "/:contactId/favorite",
   isValidId,
   // favoriteValidation(JoiFavoriteContactSchema),
-  validationBody(JoiFavoriteContactSchema),
+  validationBody(conactJoiSchemas.JoiFavoriteContactSchema),
   ctrlWrapper(ctrlsContacts.updateFavoriteContact)
 );
 
