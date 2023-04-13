@@ -8,6 +8,7 @@ const {
   // favoriteValidation,
   isValidId,
   ctrlWrapper,
+  authenticate,
 } = require("../../middlewares");
 const {
   conactJoiSchemas,
@@ -18,12 +19,18 @@ const {
 
 const router = express.Router();
 
-router.get("/", ctrlWrapper(ctrlsContacts.getContacts));
+router.get("/", authenticate, ctrlWrapper(ctrlsContacts.getContacts));
 
-router.get("/:contactId", isValidId, ctrlWrapper(ctrlsContacts.getContactById));
+router.get(
+  "/:contactId",
+  authenticate,
+  isValidId,
+  ctrlWrapper(ctrlsContacts.getContactById)
+);
 
 router.post(
   "/",
+  authenticate,
   // addContactValidation(JoiAddContactSchema),
   validationBody(conactJoiSchemas.JoiAddContactSchema),
   ctrlWrapper(ctrlsContacts.addContact)
@@ -31,12 +38,14 @@ router.post(
 
 router.delete(
   "/:contactId",
+  authenticate,
   isValidId,
   ctrlWrapper(ctrlsContacts.removeContactById)
 );
 
 router.put(
   "/:contactId",
+  authenticate,
   isValidId,
   validationBody(conactJoiSchemas.JoiUpdateContactSchema),
   // updateValidation(JoiUpdateContactSchema),
@@ -45,6 +54,7 @@ router.put(
 
 router.patch(
   "/:contactId/favorite",
+  authenticate,
   isValidId,
   // favoriteValidation(JoiFavoriteContactSchema),
   validationBody(conactJoiSchemas.JoiFavoriteContactSchema),
