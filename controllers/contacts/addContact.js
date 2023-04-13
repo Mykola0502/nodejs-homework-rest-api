@@ -14,7 +14,8 @@ const addContact = async (req, res, next) => {
   //   res.status(400).json({ message: checkerMessage || errorMessage });
   //   return;
   // }
-  const result = await Contact.create(req.body);
+  const { _id: owner } = req.user;
+  const result = await Contact.create({ ...req.body, owner });
   res.status(201).json({
     status: "success",
     code: 201,
