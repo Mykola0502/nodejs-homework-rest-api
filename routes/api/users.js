@@ -26,4 +26,11 @@ router.get("/current", authenticate, ctrlWrapper(ctrlsUsers.getCurrent));
 
 router.post("/logout", authenticate, ctrlWrapper(ctrlsUsers.logout));
 
+router.patch(
+  "/",
+  authenticate,
+  validationBody(userJoiSchemas.JoiUserSubscriptionSchema),
+  ctrlWrapper(ctrlsUsers.updateSubscription)
+);
+
 module.exports = router;
