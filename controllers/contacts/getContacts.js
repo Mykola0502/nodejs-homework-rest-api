@@ -10,12 +10,15 @@ const getContacts = async (req, res) => {
   if (name) {
     query.name = name;
   }
+
   if (email) {
     query.email = email;
   }
+
   if (phone) {
     query.phone = phone;
   }
+
   if (favorite) {
     query.favorite = favorite;
   }
@@ -33,6 +36,7 @@ const getContacts = async (req, res) => {
     "owner",
     "email subscription"
   );
+
   res.json({
     status: "success",
     code: 200,

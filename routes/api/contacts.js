@@ -2,20 +2,12 @@ const express = require("express");
 
 const { contacts: ctrlsContacts } = require("../../controllers");
 const {
-  // addContactValidation,
   validationBody,
-  // updateValidation,
-  // favoriteValidation,
   isValidId,
   ctrlWrapper,
   authenticate,
 } = require("../../middlewares");
-const {
-  conactJoiSchemas,
-  // JoiAddContactSchema,
-  // JoiUpdateContactSchema,
-  // JoiFavoriteContactSchema,
-} = require("../../models");
+const { conactJoiSchemas } = require("../../models");
 
 const router = express.Router();
 
@@ -31,7 +23,6 @@ router.get(
 router.post(
   "/",
   authenticate,
-  // addContactValidation(JoiAddContactSchema),
   validationBody(conactJoiSchemas.JoiAddContactSchema),
   ctrlWrapper(ctrlsContacts.addContact)
 );
@@ -48,7 +39,6 @@ router.put(
   authenticate,
   isValidId,
   validationBody(conactJoiSchemas.JoiUpdateContactSchema),
-  // updateValidation(JoiUpdateContactSchema),
   ctrlWrapper(ctrlsContacts.updateContactById)
 );
 
@@ -56,7 +46,6 @@ router.patch(
   "/:contactId/favorite",
   authenticate,
   isValidId,
-  // favoriteValidation(JoiFavoriteContactSchema),
   validationBody(conactJoiSchemas.JoiFavoriteContactSchema),
   ctrlWrapper(ctrlsContacts.updateFavoriteContact)
 );
