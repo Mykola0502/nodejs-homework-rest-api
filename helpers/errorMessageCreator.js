@@ -15,6 +15,12 @@ const errorMessageCreator = (req, error) => {
       }
       return error.message;
 
+    case "POST /api/users":
+      if (JSON.stringify(req.body) === "{}") {
+        return "Missing required field email";
+      }
+      return error.message;
+
     case "PATCH /api/contacts": {
       // const createErrorMessage = () => {
       //   const { favorite } = req.body;
